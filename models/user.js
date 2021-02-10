@@ -17,7 +17,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
     select: false,
   },
   name: {
@@ -25,7 +24,7 @@ const userSchema = new Schema({
     required: false,
     minlength: 2,
     maxlength: 30,
-    default: 'Жак-Ив Кусто',
+    default: 'Анонимный зритель',
   },
 });
 

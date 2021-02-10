@@ -86,5 +86,5 @@ const login = async (req, res, next) => {
 };
 
 module.exports = {
-   createUser, editUserInfo, login, getCurrentUser,
+  createUser, editUserInfo, login, getCurrentUser,
 };

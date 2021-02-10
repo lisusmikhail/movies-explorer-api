@@ -2,6 +2,7 @@ const Card = require('../models/card');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
 const { ForbiddenError } = require('../errors/ForbiddenError');
+const {errorMessages} = require('../config')
 
 const getCards = async (req, res, next) => {
   try {
@@ -18,7 +19,7 @@ const createCard = async (req, res, next) => {
   try {
     const card = await Card.create({ name, link, owner: id })
       .catch(() => {
-        throw new BadRequestError('Ошибка валидации');
+        throw new BadRequestError(errorMessages.validationError);
       });
     res.send({ data: card });
   } catch (err) {
