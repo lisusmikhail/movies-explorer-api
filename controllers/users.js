@@ -4,14 +4,16 @@ const User = require('../models/user');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
 const { AuthenticationError } = require('../errors/AuthenticationError');
+const { ConflictError } = require('../errors/ConflictError');
+const { JWT_SECRET, errorMessages } = require('../config');
 
 const getCurrentUser = async (req, res, next) => {
   const id = req.user._id;
   try {
     const user = await User.findOne({ _id: id })
-      .catch(() => { throw new BadRequestError('Неправильный формат данных'); });
+      .catch(() => { throw new BadRequestError(errorMessages.dataError); });
     if (!user) {
-      throw new NotFoundError(`Нет пользователя с таким id ${id}`);
+      throw new NotFoundError(errorMessages.notFoundError);
     } else {
       res.send(user);
     }
@@ -33,10 +35,10 @@ const createUser = async (req, res, next) => {
       .catch((err) => {
         if (Object.keys(err).some((value) => value === 'keyPattern')) {
           if (Object.keys(err.keyPattern)[0] === 'email') {
-            throw new BadRequestError('Пользователь с таким email уже зарегистрирован');
+            throw new ConflictError(errorMessages.emailError);
           }
         }
-        throw new BadRequestError('Ошибка валидации');
+        throw new BadRequestError(errorMessages.dataError);
       });
     res.status(201).send({
       data: {
@@ -55,10 +57,10 @@ const editUserInfo = async (req, res, next) => {
     if (name && email) {
       const userInfo = await User.findByIdAndUpdate(id, { name, email },
         { new: true, runValidators: true })
-        .catch(() => { throw new BadRequestError('Ошибка в данных или валидации'); });
+        .catch(() => { throw new BadRequestError(errorMessages.dataError); });
       res.send({ data: userInfo });
     } else {
-      throw new BadRequestError('Недостаточно данных');
+      throw new BadRequestError(errorMessages.dataError);
     }
   } catch (err) {
     next(err);
@@ -67,14 +69,13 @@ const editUserInfo = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  const { NODE_ENV, JWT_SECRET } = process.env;
   try {
     const user = await User.findUserByCredentials(email, password)
       .catch((err) => { throw new AuthenticationError(err.message); });
 
     const token = jwt.sign(
       { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' },
+      JWT_SECRET, { expiresIn: '7d' },
     );
 
     res.send({
