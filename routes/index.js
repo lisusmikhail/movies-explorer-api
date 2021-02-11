@@ -8,11 +8,13 @@ const { NotFoundError } = require('../errors/NotFoundError');
 const auth = require('../middlewares/auth');
 const checkPassword = require('../middlewares/check-password');
 const usersRoute = require('./users');
+const moviesRoute = require('./movies');
 
 router.post('/signin', authDataValidator, checkPassword, login);
 router.post('/signup', authDataValidator, checkPassword, createUser);
 router.use(auth);
 router.use('/users', userDataValidator, usersRoute);
+router.use('/movies', moviesRoute);
 
 router.use('/', ((req, res, next) => {
   next(new NotFoundError(errorMessages.notFoundError));

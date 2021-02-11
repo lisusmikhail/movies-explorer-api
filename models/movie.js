@@ -54,27 +54,23 @@ const cardSchema = new mongoose.Schema({
       message: 'This field must be a valid URL',
     },
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
+  movieId: {
+    type: Number,
+    required: true,
+  },
+  nameRU: {
+    type: String,
+    required: true,
+  },
+  nameEN: {
+    type: String,
+    required: true,
+  },
 });
 
-//
-//
-//
-//   thumbnail: {
-//     type: String,
-//     required: true,
-//     validate: {
-//     validator: (v) => validator.isURL(v),
-//       message: 'This field must be a valid URL'
-//   },
-//     },
-//   },
-//   owner: [{ type: 'ObjectId', default: '' }],
-//   createdAt: { type: Date, default: Date.now },
-//   owner: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'user',
-//     required: true,
-//   },
-// });
-
-module.exports = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('movie', cardSchema);

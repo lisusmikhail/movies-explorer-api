@@ -9,7 +9,6 @@ const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { MONGO_DEV_URL } = require('./config');
 const errorHandler = require('./middlewares/error-handler');
-// const cardsRoute = require('./routes/cards');
 
 const { PORT = 3000, MONGO_URL = MONGO_DEV_URL } = process.env;
 
@@ -33,8 +32,6 @@ app.get('/crash-test', () => {
 });
 
 app.use(routes);
-// app.use('/cards', cardsRoute);
-//
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
