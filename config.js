@@ -9,6 +9,7 @@ const errorMessages = {
   notFoundError: 'Запрашиваемый ресурс не найден',
   dataError: 'Ошибка в данных или валидации',
   emailError: 'Пользователь с таким email уже зарегистрирован',
+  forbiddenError: 'Нет прав на эту операцию',
 
 };
 

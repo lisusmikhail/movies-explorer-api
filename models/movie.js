@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const cardSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
@@ -28,7 +28,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 140,
+    maxlength: 11140,
   },
   image: {
     type: String,
@@ -54,27 +54,23 @@ const cardSchema = new mongoose.Schema({
       message: 'This field must be a valid URL',
     },
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
+  movieId: {
+    type: Number,
+    required: true,
+  },
+  nameRU: {
+    type: String,
+    required: true,
+  },
+  nameEN: {
+    type: String,
+    required: true,
+  },
 });
 
-//
-//
-//
-//   thumbnail: {
-//     type: String,
-//     required: true,
-//     validate: {
-//     validator: (v) => validator.isURL(v),
-//       message: 'This field must be a valid URL'
-//   },
-//     },
-//   },
-//   owner: [{ type: 'ObjectId', default: '' }],
-//   createdAt: { type: Date, default: Date.now },
-//   owner: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'user',
-//     required: true,
-//   },
-// });
-
-module.exports = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('movie', movieSchema);
