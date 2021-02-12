@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { userDataValidator, authDataValidator } = require('../middlewares/validator');
+const { userDataValidator, authDataValidator, objectIdValidator } = require('../middlewares/validator');
 const { errorMessages } = require('../config');
 const {
   createUser, login,
