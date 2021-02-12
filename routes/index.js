@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { userDataValidator, authDataValidator, objectIdValidator } = require('../middlewares/validator');
-const { errorMessages } = require('../config');
+const { authDataValidator } = require('../middlewares/validator');
+const { authLimiter } = require('../middlewares/limiter');
+const errorMessages = require('../utils');
 const {
   createUser, login,
 } = require('../controllers/users');
@@ -11,9 +12,9 @@ const usersRoute = require('./users');
 const moviesRoute = require('./movies');
 
 router.post('/signin', authDataValidator, checkPassword, login);
-router.post('/signup', authDataValidator, checkPassword, createUser);
+router.post('/signup', authDataValidator, checkPassword, authLimiter, createUser);
 router.use(auth);
-router.use('/users', userDataValidator, usersRoute);
+router.use('/users', usersRoute);
 router.use('/movies', moviesRoute);
 
 router.use('/', ((req, res, next) => {

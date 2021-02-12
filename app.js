@@ -3,12 +3,13 @@ require('dotenv').config();
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const cors = require('cors');
+const helmet = require('helmet');
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { MONGO_DEV_URL } = require('./config');
 const errorHandler = require('./middlewares/error-handler');
+const { limiter } = require('./middlewares/limiter');
 
 const { PORT = 3000, MONGO_URL = MONGO_DEV_URL } = process.env;
 
@@ -19,7 +20,10 @@ mongoose.connect(MONGO_URL, {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-// helmet
+
+//  apply to all requests
+app.use(limiter);
+app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -2,7 +2,7 @@ const Movie = require('../models/movie');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
 const { ForbiddenError } = require('../errors/ForbiddenError');
-const { errorMessages } = require('../config');
+const errorMessages = require('../utils');
 
 const getMovies = async (req, res, next) => {
   try {
@@ -14,35 +14,9 @@ const getMovies = async (req, res, next) => {
 };
 
 const createMovie = async (req, res, next) => {
-  const id = req.user._id;
-  const {
-    movieId,
-    nameRU,
-    nameEN,
-    director,
-    country,
-    year,
-    duration,
-    description,
-    trailer,
-    thumbnail,
-    image,
-  } = req.body;
+  req.body.owner = req.user._id;
   try {
-    const movie = await Movie.create({
-      movieId,
-      nameRU,
-      nameEN,
-      director,
-      country,
-      year,
-      duration,
-      description,
-      trailer,
-      thumbnail,
-      image,
-      owner: id,
-    })
+    const movie = await Movie.create(req.body)
       .catch(() => {
         throw new BadRequestError(errorMessages.dataError);
       });

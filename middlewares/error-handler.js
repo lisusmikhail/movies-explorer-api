@@ -1,4 +1,4 @@
-const { errorMessages } = require('../config');
+const errorMessages = require('../utils');
 
 const errorHandler = (err, req, res, next) => {
   const { statusCode = 500, message } = err;

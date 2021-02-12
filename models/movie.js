@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const errorMessages = require('../utils');
 
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 50,
   },
   director: {
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 50,
   },
   duration: {
     type: Number,
@@ -21,21 +22,20 @@ const movieSchema = new mongoose.Schema({
   year: {
     type: String,
     required: true,
-    minlength: 2,
+    minlength: 4,
     maxlength: 10,
   },
   description: {
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 11140,
   },
   image: {
     type: String,
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'This field must be a valid URL',
+      message: errorMessages.urlInvalid,
     },
   },
   trailer: {
@@ -43,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'This field must be a valid URL',
+      message: errorMessages.urlInvalid,
     },
   },
   thumbnail: {
@@ -51,7 +51,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'This field must be a valid URL',
+      message: errorMessages.urlInvalid,
     },
   },
   owner: {

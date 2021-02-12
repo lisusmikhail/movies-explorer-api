@@ -5,7 +5,8 @@ const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
 const { AuthenticationError } = require('../errors/AuthenticationError');
 const { ConflictError } = require('../errors/ConflictError');
-const { JWT_SECRET, errorMessages } = require('../config');
+const { JWT_SECRET } = require('../config');
+const errorMessages = require('../utils');
 
 const getCurrentUser = async (req, res, next) => {
   const id = req.user._id;
