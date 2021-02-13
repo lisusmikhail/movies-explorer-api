@@ -21,7 +21,6 @@ mongoose.connect(MONGO_URL, {
   useUnifiedTopology: true,
 });
 
-app.use(limiter);
 app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use(routes);
 app.use(errorLogger);
+app.use(limiter);
 app.use(errors());
 app.use(errorHandler);
 

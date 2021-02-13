@@ -38,7 +38,7 @@ const deleteMovie = async (req, res, next) => {
       throw new NotFoundError(errorMessages.notFoundError);
     }
     if (movieToDelete.owner.toString() === userId.toString()) {
-      const deletedMovie = await Movie.findByIdAndRemove({ _id: id });
+      const deletedMovie = await movieToDelete.remove();
       res.send(deletedMovie);
     } else {
       throw new ForbiddenError(errorMessages.forbiddenError);
