@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50,
+    required: [true, errorMessages.requireFieldError],
+    minlength: [2, errorMessages.notEnoughData],
+    maxlength: [50, errorMessages.tooMuchData],
   },
   director: {
     type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50,
+    required: [true, errorMessages.requireFieldError],
+    minlength: [2, errorMessages.notEnoughData],
+    maxlength: [50, errorMessages.tooMuchData],
   },
   duration: {
     type: Number,
@@ -21,18 +21,19 @@ const movieSchema = new mongoose.Schema({
   },
   year: {
     type: String,
-    required: true,
-    minlength: 4,
-    maxlength: 10,
+    required: [true, errorMessages.requireFieldError],
+    minlength: [4, errorMessages.notEnoughData],
+    maxlength: [10, errorMessages.tooMuchData],
   },
   description: {
     type: String,
-    required: true,
-    minlength: 2,
+    required: [true, errorMessages.requireFieldError],
+    minlength: [2, errorMessages.notEnoughData],
+    maxlength: [1200, errorMessages.tooMuchData],
   },
   image: {
     type: String,
-    required: true,
+    required: [true, errorMessages.requireFieldError],
     validate: {
       validator: (v) => validator.isURL(v),
       message: errorMessages.urlInvalid,
@@ -40,7 +41,7 @@ const movieSchema = new mongoose.Schema({
   },
   trailer: {
     type: String,
-    required: true,
+    required: [true, errorMessages.requireFieldError],
     validate: {
       validator: (v) => validator.isURL(v),
       message: errorMessages.urlInvalid,
@@ -48,7 +49,7 @@ const movieSchema = new mongoose.Schema({
   },
   thumbnail: {
     type: String,
-    required: true,
+    required: [true, errorMessages.requireFieldError],
     validate: {
       validator: (v) => validator.isURL(v),
       message: errorMessages.urlInvalid,
@@ -57,19 +58,21 @@ const movieSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: true,
+    required: [true, errorMessages.requireFieldError],
   },
   movieId: {
     type: Number,
-    required: true,
+    required: [true, errorMessages.requireFieldError],
   },
   nameRU: {
     type: String,
-    required: true,
+    required: [true, errorMessages.requireFieldError],
+    maxlength: [120, errorMessages.tooMuchData],
   },
   nameEN: {
     type: String,
-    required: true,
+    required: [true, errorMessages.requireFieldError],
+    maxlength: [120, errorMessages.tooMuchData],
   },
 });
 

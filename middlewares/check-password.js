@@ -1,5 +1,5 @@
 const { BadRequestError } = require('../errors/BadRequestError');
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 
 const checkPassword = (req, res, next) => {
   const { password } = req.body;

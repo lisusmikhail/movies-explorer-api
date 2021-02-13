@@ -1,7 +1,7 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 const { ObjectId } = require('mongoose').Types;
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 
 const authDataValidator = celebrate({
   body: Joi.object().keys({

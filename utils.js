@@ -19,4 +19,6 @@ const errorMessages = {
   tooBigNumber: 'Значение этого поля превышает максимально допустимое',
 };
 
-module.exports = errorMessages;
+const defaultName = 'Анонимный зритель';
+
+module.exports = { errorMessages, defaultName };
