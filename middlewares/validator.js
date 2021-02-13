@@ -70,11 +70,40 @@ const createMovieValidator = celebrate({
   }).unknown(true),
   body: Joi.object().keys({
     country: Joi.string().required().min(2).max(50)
-      .messages({ string: 'slkdjgsldkjgklgjkl' }),
-    director: Joi.string().required().min(2).max(50),
-    duration: Joi.number().required(),
-    year: Joi.string().required().min(4).max(10),
-    description: Joi.string().required().min(2),
+      .messages({
+        'string.empty': errorMessages.emptyFieldError,
+        'any.required': errorMessages.requireFieldError,
+        'string.min': errorMessages.notEnoughData,
+        'string.max': errorMessages.tooMuchData,
+      }),
+    director: Joi.string().required().min(2).max(50)
+      .messages({
+        'string.empty': errorMessages.emptyFieldError,
+        'any.required': errorMessages.requireFieldError,
+        'string.min': errorMessages.notEnoughData,
+        'string.max': errorMessages.tooMuchData,
+      }),
+    duration: Joi.number().required().max(500).positive()
+      .messages({
+        'number.base': errorMessages.notANumber,
+        'any.required': errorMessages.requireFieldError,
+        'number.max': errorMessages.tooBigNumber,
+        'number.positive': errorMessages.notANumber,
+      }),
+    year: Joi.string().required().min(4).max(10)
+      .messages({
+        'string.empty': errorMessages.emptyFieldError,
+        'any.required': errorMessages.requireFieldError,
+        'string.min': errorMessages.notEnoughData,
+        'string.max': errorMessages.tooMuchData,
+      }),
+    description: Joi.string().required().min(2).max(1200)
+      .messages({
+        'string.empty': errorMessages.emptyFieldError,
+        'any.required': errorMessages.requireFieldError,
+        'string.min': errorMessages.notEnoughData,
+        'string.max': errorMessages.tooMuchData,
+      }),
     image: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value)) {
         return value;
@@ -93,9 +122,24 @@ const createMovieValidator = celebrate({
       }
       return helpers.message(errorMessages.urlInvalid);
     }),
-    movieId: Joi.number().required(),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
+    movieId: Joi.number().required().positive()
+      .messages({
+        'number.base': errorMessages.notANumber,
+        'any.required': errorMessages.requireFieldError,
+        'number.positive': errorMessages.notANumber,
+      }),
+    nameRU: Joi.string().required().max(120)
+      .messages({
+        'string.empty': errorMessages.emptyFieldError,
+        'any.required': errorMessages.requireFieldError,
+        'string.max': errorMessages.tooMuchData,
+      }),
+    nameEN: Joi.string().required().max(120)
+      .messages({
+        'string.empty': errorMessages.emptyFieldError,
+        'any.required': errorMessages.requireFieldError,
+        'string.max': errorMessages.tooMuchData,
+      }),
   }),
 });
 
