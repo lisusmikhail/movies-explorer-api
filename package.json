@@ -1,7 +1,7 @@
 {
-  "name": "express-mesto",
+  "name": "movie-explorer-backend",
   "version": "1.0.0",
-  "description": "## Директории",
+  "description": "movie-explorer-backend",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lisusmikhail/express-mesto.git"
+    "url": "https://github.com/lisusmikhail/movies-explorer-api.git"
   },
   "keywords": [],
   "author": "Mikhail Lisus",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lisusmikhail/express-mesto/issues"
+    "url": "https://github.com/lisusmikhail/movies-explorer-api"
   },
-  "homepage": "https://github.com/lisusmikhail/express-mesto#readme",
+  "homepage": "https://github.com/lisusmikhail/movies-explorer-api#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

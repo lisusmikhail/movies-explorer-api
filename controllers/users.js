@@ -6,7 +6,7 @@ const { BadRequestError } = require('../errors/BadRequestError');
 const { AuthenticationError } = require('../errors/AuthenticationError');
 const { ConflictError } = require('../errors/ConflictError');
 const { JWT_SECRET } = require('../config');
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 
 const getCurrentUser = async (req, res, next) => {
   const id = req.user._id;
@@ -72,8 +72,9 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findUserByCredentials(email, password)
-      .catch((err) => { throw new AuthenticationError(err.message); });
-
+      .catch((err) => {
+        throw new AuthenticationError(err.message);
+      });
     const token = jwt.sign(
       { _id: user._id },
       JWT_SECRET, { expiresIn: '7d' },

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { authDataValidator } = require('../middlewares/validator');
 const { authLimiter } = require('../middlewares/limiter');
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 const {
   createUser, login,
 } = require('../controllers/users');

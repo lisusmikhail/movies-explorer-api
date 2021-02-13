@@ -2,7 +2,7 @@ const Movie = require('../models/movie');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
 const { ForbiddenError } = require('../errors/ForbiddenError');
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 
 const getMovies = async (req, res, next) => {
   try {

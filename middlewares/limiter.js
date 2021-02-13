@@ -1,6 +1,6 @@
 const rateLimit = require('express-rate-limit');
 const { TooManyRequests } = require('../errors/TooManyRequests');
-const errorMessages = require('../utils');
+const { errorMessages } = require('../utils');
 
 const limitReached = () => {
   throw new TooManyRequests(errorMessages.tooManyRequests);

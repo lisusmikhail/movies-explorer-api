@@ -21,20 +21,12 @@ mongoose.connect(MONGO_URL, {
   useUnifiedTopology: true,
 });
 
-//  apply to all requests
 app.use(limiter);
 app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());
