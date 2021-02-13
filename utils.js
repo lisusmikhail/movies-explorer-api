@@ -10,6 +10,11 @@ const errorMessages = {
   emailInvalid: 'Неправильный формат адреса электронной почты',
   credentialsError: 'Неправильные почта или пароль',
   tooManyRequests: 'Превышено допустимое количество запросов',
+  idIsNotValid: 'Невалидный ID',
+  emptyFieldError: 'Данное поле не должно быть пустым',
+  requireFieldError: 'Данное поле является обязательным',
+  notEnoughData: 'Данное поле содержит недостаточно символов',
+  tooMuchData: 'Количество символов в данном поле превышает допустимое значение',
 };
 
 module.exports = errorMessages;

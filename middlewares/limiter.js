@@ -8,7 +8,7 @@ const limitReached = () => {
 
 const limiter = rateLimit({
   windowMs: 60000,
-  max: 20,
+  max: 5,
   onLimitReached: limitReached,
   handler: limitReached,
 });

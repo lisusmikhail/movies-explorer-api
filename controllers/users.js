@@ -72,8 +72,9 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findUserByCredentials(email, password)
-      .catch((err) => { throw new AuthenticationError(err.message); });
-
+      .catch((err) => {
+        throw new AuthenticationError(err.message);
+      });
     const token = jwt.sign(
       { _id: user._id },
       JWT_SECRET, { expiresIn: '7d' },
