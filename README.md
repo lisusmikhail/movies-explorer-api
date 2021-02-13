@@ -10,21 +10,15 @@
 `npm start`
 
 ### Endpoints
-- создаёт пользователя с переданными в теле: email, password и name
-#####POST /signup
-- проверяет переданные в теле почту и пароль и возвращает JWT
-#####POST /signin
-- возвращает информацию о пользователе (email и имя)
-#####GET /users/me
-- обновляет информацию о пользователе (email и имя)
-#####PUT /users/me
-- возвращает все сохранённые пользователем фильмы
-#####GET /movies
-- создаёт фильм с переданными в теле:
+- **POST /signup** создаёт пользователя с переданными в теле: email, password и name
+- **POST /signin** проверяет переданные в теле почту и пароль и возвращает JWT
+- **GET /users/me** возвращает информацию о пользователе (email и имя)
+- **PUT /users/me** обновляет информацию о пользователе (email и имя)
+- **GET /movies** возвращает все сохранённые пользователем фильмы
+- **POST /movies** создаёт фильм с переданными в теле:
   movieId, country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail
-#####POST /movies
-- удаляет сохранённый фильм по _id
-#####DELETE /movies/_id
+- **DELETE /movies/_id** удаляет сохранённый фильм по _id
+  
 
 ###Логирование
 - **request.log**, чтобы хранить информацию о всех запросах к API;
