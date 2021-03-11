@@ -27,7 +27,7 @@ const createUser = async (req, res, next) => {
   const {
     email, password, name,
   } = req.body;
-
+  console.log('create user',{name, email, password})
   try {
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({
@@ -53,7 +53,10 @@ const createUser = async (req, res, next) => {
 
 const editUserInfo = async (req, res, next) => {
   const { name, email } = req.body;
+
   const id = req.user._id;
+
+
   try {
     if (name && email) {
       const userInfo = await User.findByIdAndUpdate(id, { name, email },

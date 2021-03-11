@@ -7,13 +7,13 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: [true, errorMessages.requireFieldError],
     minlength: [2, errorMessages.notEnoughData],
-    maxlength: [50, errorMessages.tooMuchData],
+    maxlength: [250, errorMessages.tooMuchData],
   },
   director: {
     type: String,
     required: [true, errorMessages.requireFieldError],
     minlength: [2, errorMessages.notEnoughData],
-    maxlength: [50, errorMessages.tooMuchData],
+    maxlength: [250, errorMessages.tooMuchData],
   },
   duration: {
     type: Number,
@@ -23,13 +23,13 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: [true, errorMessages.requireFieldError],
     minlength: [4, errorMessages.notEnoughData],
-    maxlength: [10, errorMessages.tooMuchData],
+    maxlength: [50, errorMessages.tooMuchData],
   },
   description: {
     type: String,
     required: [true, errorMessages.requireFieldError],
     minlength: [2, errorMessages.notEnoughData],
-    maxlength: [1200, errorMessages.tooMuchData],
+    maxlength: [5200, errorMessages.tooMuchData],
   },
   image: {
     type: String,
@@ -67,12 +67,12 @@ const movieSchema = new mongoose.Schema({
   nameRU: {
     type: String,
     required: [true, errorMessages.requireFieldError],
-    maxlength: [120, errorMessages.tooMuchData],
+    maxlength: [520, errorMessages.tooMuchData],
   },
   nameEN: {
     type: String,
     required: [true, errorMessages.requireFieldError],
-    maxlength: [120, errorMessages.tooMuchData],
+    maxlength: [520, errorMessages.tooMuchData],
   },
 });
 

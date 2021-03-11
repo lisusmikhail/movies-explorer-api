@@ -17,7 +17,7 @@ const authDataValidator = celebrate({
         'string.min': errorMessages.passwordError,
         'any.required': errorMessages.requireFieldError,
       }),
-    name: Joi.string().min(2).max(30)
+    name: Joi.string().min(2).max(300)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'string.min': errorMessages.notEnoughData,
@@ -34,7 +34,7 @@ const userDataValidator = celebrate({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
       }),
-    name: Joi.string().required().min(2).max(30)
+    name: Joi.string().required().min(2).max(300)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
@@ -69,35 +69,35 @@ const createMovieValidator = celebrate({
     authorization: Joi.string().regex(/^Bearer +/),
   }).unknown(true),
   body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(50)
+    country: Joi.string().required().min(2).max(350)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
         'string.min': errorMessages.notEnoughData,
         'string.max': errorMessages.tooMuchData,
       }),
-    director: Joi.string().required().min(2).max(50)
+    director: Joi.string().required().min(2).max(2500)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
         'string.min': errorMessages.notEnoughData,
         'string.max': errorMessages.tooMuchData,
       }),
-    duration: Joi.number().required().max(500).positive()
+    duration: Joi.number().required().max(2500).positive()
       .messages({
         'number.base': errorMessages.notANumber,
         'any.required': errorMessages.requireFieldError,
         'number.max': errorMessages.tooBigNumber,
         'number.positive': errorMessages.notANumber,
       }),
-    year: Joi.string().required().min(4).max(10)
+    year: Joi.string().required().min(4).max(100)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
         'string.min': errorMessages.notEnoughData,
         'string.max': errorMessages.tooMuchData,
       }),
-    description: Joi.string().required().min(2).max(1200)
+    description: Joi.string().required().min(2).max(5200)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
@@ -128,13 +128,13 @@ const createMovieValidator = celebrate({
         'any.required': errorMessages.requireFieldError,
         'number.positive': errorMessages.notANumber,
       }),
-    nameRU: Joi.string().required().max(120)
+    nameRU: Joi.string().required().max(1200)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,
         'string.max': errorMessages.tooMuchData,
       }),
-    nameEN: Joi.string().required().max(120)
+    nameEN: Joi.string().required().max(1200)
       .messages({
         'string.empty': errorMessages.emptyFieldError,
         'any.required': errorMessages.requireFieldError,

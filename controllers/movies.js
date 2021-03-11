@@ -15,9 +15,10 @@ const getMovies = async (req, res, next) => {
 
 const createMovie = async (req, res, next) => {
   req.body.owner = req.user._id;
+  console.log(req.body)
   try {
     const movie = await Movie.create(req.body)
-      .catch(() => {
+      .catch((err) => {
         throw new BadRequestError(errorMessages.dataError);
       });
     res.send({ data: movie });
@@ -39,6 +40,7 @@ const deleteMovie = async (req, res, next) => {
     }
     if (movieToDelete.owner.toString() === userId.toString()) {
       const deletedMovie = await movieToDelete.remove();
+      console.log('deletedMovie====>', deletedMovie)
       res.send(deletedMovie);
     } else {
       throw new ForbiddenError(errorMessages.forbiddenError);
